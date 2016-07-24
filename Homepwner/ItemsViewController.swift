@@ -10,8 +10,42 @@ import UIKit
 
 class ItemsViewController: UITableViewController {
     
+    // MARK: - Properties
     var itemStore: ItemStore!
+    var imageStore: ImageStore!
     
+    // MARK: - Initializers
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        navigationItem.leftBarButtonItem = editButtonItem()
+    }
+    
+    
+    // MARK: - View life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Get the height of the status bar
+        // let statusBarHieght = UIApplication.sharedApplication().statusBarFrame.height
+        
+        // let insets = UIEdgeInsets(top: statusBarHieght, left: 0, bottom: 0, right: 0)
+        // tableView.contentInset = insets
+        // tableView.scrollIndicatorInsets = insets
+        
+        // tableView.rowHeight = 65
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 65
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
+    
+    // MARK: - Actions
     @IBAction func addNewItem(sender: AnyObject) {
         // let lastRow = tableView.numberOfRowsInSection(0)
         // let indexPath = NSIndexPath(forRow: lastRow, inSection: 0)
@@ -43,6 +77,21 @@ class ItemsViewController: UITableViewController {
 //        
 //    }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowItem" {
+            
+            if let row = tableView.indexPathForSelectedRow?.row {
+                
+                let item = itemStore.allItems[row]
+                let detailViewController = segue.destinationViewController as! DetailViewController
+                detailViewController.item = item
+                detailViewController.imageStore = imageStore
+            }
+        }
+    }
+    
+    
+    // MARK: - UITableViewDataSource methods
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemStore.allItems.count
     }
@@ -69,20 +118,7 @@ class ItemsViewController: UITableViewController {
         return cell
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Get the height of the status bar
-        // let statusBarHieght = UIApplication.sharedApplication().statusBarFrame.height
-        
-        // let insets = UIEdgeInsets(top: statusBarHieght, left: 0, bottom: 0, right: 0)
-        // tableView.contentInset = insets
-        // tableView.scrollIndicatorInsets = insets
-        
-        // tableView.rowHeight = 65
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 65
-    }
+
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -100,6 +136,7 @@ class ItemsViewController: UITableViewController {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: { (action) -> Void in
                 self.itemStore.removeItem(item)
+                self.imageStore.deleteImageForKey(item.itemKey)
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             })
             ac.addAction(deleteAction)
@@ -110,30 +147,5 @@ class ItemsViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         itemStore.moveItemAtIndex(sourceIndexPath.row, toIndex: destinationIndexPath.row)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ShowItem" {
-            
-            if let row = tableView.indexPathForSelectedRow?.row {
-                
-                let item = itemStore.allItems[row]
-                let detailViewController = segue.destinationViewController as! DetailViewController
-                detailViewController.item = item
-                
-            }
-        }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tableView.reloadData()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        navigationItem.leftBarButtonItem = editButtonItem()
     }
 }

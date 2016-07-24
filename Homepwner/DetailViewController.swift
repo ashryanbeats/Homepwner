@@ -8,18 +8,21 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITextFieldDelegate {
+class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    // MARK: - Properties
     @IBOutlet var nameField: UITextField!
     @IBOutlet var serialNumberField: UITextField!
     @IBOutlet var valueField: UITextField!
     @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var imageView: UIImageView!
     
     var item: Item! {
         didSet {
             navigationItem.title = item.name
         }
     }
+    var imageStore: ImageStore!
     
     let numberFormatter: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
@@ -35,7 +38,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         formatter.timeStyle = .NoStyle
         return formatter
     }()
+        
     
+    // MARK: - View life cycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -43,6 +48,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         serialNumberField.text = item.serialNumber
         valueField.text = numberFormatter.stringFromNumber(item.valueInDollars)
         dateLabel.text = dateFormatter.stringFromDate(item.dateCreated)
+        
+        imageView.image = imageStore.imageForKey(item.itemKey)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -61,12 +68,44 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
+    // MARK: - Actions
+    @IBAction func takePicture(sender: UIBarButtonItem) {
+        
+        let imagePicker = UIImagePickerController()
+        
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            //imagePicker.allowsEditing = true
+            imagePicker.sourceType = .Camera
+        }
+        else {
+            imagePicker.sourceType = .PhotoLibrary
+        }
+        
+        imagePicker.delegate = self
+        
+        presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func backgroundTapped(sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
-    @IBAction func backgroundTapped(sender: UITapGestureRecognizer) {
-        view.endEditing(true)
+
+    // UIImagePickerControllerDelegate methods
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        //let image = info[UIImagePickerControllerEditedImage] as! UIImage
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        imageStore.setImage(image, forKey: item.itemKey)
+        
+        imageView.image = image
+        
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

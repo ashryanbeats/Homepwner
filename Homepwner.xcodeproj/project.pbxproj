@@ -17,6 +17,7 @@
 		86385CED1D43E57400E44111 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86385CEC1D43E57400E44111 /* ItemCell.swift */; };
 		86385CEF1D43FEC500E44111 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86385CEE1D43FEC500E44111 /* DetailViewController.swift */; };
 		86D1927B1D45179700ED4AC1 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D1927A1D45179700ED4AC1 /* TextField.swift */; };
+		86D1927D1D4525A500ED4AC1 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D1927C1D4525A500ED4AC1 /* ImageStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		86385CEC1D43E57400E44111 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		86385CEE1D43FEC500E44111 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		86D1927A1D45179700ED4AC1 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		86D1927C1D4525A500ED4AC1 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,17 +66,18 @@
 		86385CD31D43BAD700E44111 /* Homepwner */ = {
 			isa = PBXGroup;
 			children = (
+				86385CE01D43BAD700E44111 /* Info.plist */,
 				86385CD41D43BAD700E44111 /* AppDelegate.swift */,
 				86385CE81D43BEAE00E44111 /* Item.swift */,
 				86385CEA1D43C20200E44111 /* ItemStore.swift */,
+				86D1927C1D4525A500ED4AC1 /* ImageStore.swift */,
 				86385CEC1D43E57400E44111 /* ItemCell.swift */,
 				86385CE61D43BBA200E44111 /* ItemsViewController.swift */,
 				86385CEE1D43FEC500E44111 /* DetailViewController.swift */,
-				86385CD81D43BAD700E44111 /* Main.storyboard */,
 				86D1927A1D45179700ED4AC1 /* TextField.swift */,
-				86385CDB1D43BAD700E44111 /* Assets.xcassets */,
+				86385CD81D43BAD700E44111 /* Main.storyboard */,
 				86385CDD1D43BAD700E44111 /* LaunchScreen.storyboard */,
-				86385CE01D43BAD700E44111 /* Info.plist */,
+				86385CDB1D43BAD700E44111 /* Assets.xcassets */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 				86385CE71D43BBA200E44111 /* ItemsViewController.swift in Sources */,
 				86385CE91D43BEAE00E44111 /* Item.swift in Sources */,
 				86385CEB1D43C20200E44111 /* ItemStore.swift in Sources */,
+				86D1927D1D4525A500ED4AC1 /* ImageStore.swift in Sources */,
 				86D1927B1D45179700ED4AC1 /* TextField.swift in Sources */,
 				86385CEF1D43FEC500E44111 /* DetailViewController.swift in Sources */,
 				86385CD51D43BAD700E44111 /* AppDelegate.swift in Sources */,

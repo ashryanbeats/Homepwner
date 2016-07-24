@@ -89,7 +89,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gnn-L1-779">
-                                <rect key="frame" x="20" y="72" width="560" height="520"/>
+                                <rect key="frame" x="20" y="72" width="560" height="476"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QKr-k9-HHH">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
@@ -149,11 +149,14 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Date Created" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWt-ws-4ZS">
-                                        <rect key="frame" x="0.0" y="114" width="560" height="406"/>
+                                        <rect key="frame" x="0.0" y="114" width="560" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="bAc-hq-tzx">
+                                        <rect key="frame" x="0.0" y="143" width="560" height="333"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="NeL-yO-sr6" firstAttribute="leading" secondItem="URw-Mg-Cgn" secondAttribute="leading" id="8qL-gK-J7s"/>
@@ -162,14 +165,31 @@
                                     <constraint firstItem="tUD-q9-WlW" firstAttribute="leading" secondItem="RIg-jh-Qy6" secondAttribute="leading" id="uuc-IR-tT9"/>
                                 </constraints>
                             </stackView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WlI-Tt-7sP">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="fx1-DW-iYh"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="wqH-Q7-SHB"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="camera" id="UsM-IK-hG6">
+                                        <connections>
+                                            <action selector="takePicture:" destination="hEo-El-d2L" id="oS5-MW-pv1"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="GKI-EJ-awg" firstAttribute="top" secondItem="gnn-L1-779" secondAttribute="bottom" constant="8" id="N3h-YX-bSN"/>
+                            <constraint firstItem="GKI-EJ-awg" firstAttribute="top" secondItem="WlI-Tt-7sP" secondAttribute="bottom" id="Cwj-ai-SgX"/>
                             <constraint firstItem="gnn-L1-779" firstAttribute="top" secondItem="bHd-kk-u5n" secondAttribute="bottom" constant="8" id="UrS-rz-Hiv"/>
+                            <constraint firstAttribute="trailing" secondItem="WlI-Tt-7sP" secondAttribute="trailing" id="Wp1-YK-Z3I"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gnn-L1-779" secondAttribute="trailing" id="gyC-wl-d6g"/>
+                            <constraint firstItem="WlI-Tt-7sP" firstAttribute="leading" secondItem="g8y-tj-hiR" secondAttribute="leading" id="qfq-JS-bBj"/>
                             <constraint firstItem="gnn-L1-779" firstAttribute="leading" secondItem="g8y-tj-hiR" secondAttribute="leadingMargin" id="vjF-Yk-SYU"/>
+                            <constraint firstItem="WlI-Tt-7sP" firstAttribute="top" secondItem="gnn-L1-779" secondAttribute="bottom" constant="8" id="vzS-Qq-n26"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="kFC-bL-tAF" appends="YES" id="wOL-lN-50n"/>
@@ -177,6 +197,7 @@
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="VWt-ws-4ZS" id="PqK-ze-aee"/>
+                        <outlet property="imageView" destination="bAc-hq-tzx" id="76o-Ss-94T"/>
                         <outlet property="nameField" destination="zAa-zf-7m4" id="Jjd-y3-kVB"/>
                         <outlet property="serialNumberField" destination="tUD-q9-WlW" id="wXI-hc-xeZ"/>
                         <outlet property="valueField" destination="RIg-jh-Qy6" id="Q0i-Fb-VDQ"/>
