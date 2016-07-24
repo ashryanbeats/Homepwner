@@ -28,20 +28,20 @@ class ItemsViewController: UITableViewController {
     
     }
     
-    @IBAction func toggleEditingMode(sender: AnyObject) {
-        
-        if editing {
-            sender.setTitle("Edit", forState: .Normal)
-            
-            setEditing(false, animated: true)
-        }
-        else {
-            sender.setTitle("Done", forState: .Normal)
-            
-            setEditing(true, animated: true)
-        }
-        
-    }
+//    @IBAction func toggleEditingMode(sender: AnyObject) {
+//        
+//        if editing {
+//            sender.setTitle("Edit", forState: .Normal)
+//            
+//            setEditing(false, animated: true)
+//        }
+//        else {
+//            sender.setTitle("Done", forState: .Normal)
+//            
+//            setEditing(true, animated: true)
+//        }
+//        
+//    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemStore.allItems.count
@@ -73,11 +73,11 @@ class ItemsViewController: UITableViewController {
         super.viewDidLoad()
         
         // Get the height of the status bar
-        let statusBarHieght = UIApplication.sharedApplication().statusBarFrame.height
+        // let statusBarHieght = UIApplication.sharedApplication().statusBarFrame.height
         
-        let insets = UIEdgeInsets(top: statusBarHieght, left: 0, bottom: 0, right: 0)
-        tableView.contentInset = insets
-        tableView.scrollIndicatorInsets = insets
+        // let insets = UIEdgeInsets(top: statusBarHieght, left: 0, bottom: 0, right: 0)
+        // tableView.contentInset = insets
+        // tableView.scrollIndicatorInsets = insets
         
         // tableView.rowHeight = 65
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -123,5 +123,17 @@ class ItemsViewController: UITableViewController {
                 
             }
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        navigationItem.leftBarButtonItem = editButtonItem()
     }
 }
